@@ -19,4 +19,18 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         response = home_page(request)
         expected_html = render_to_string('home.html')
-        self.assertEqual(response.content.decode(), expected_html)
+        actual_html = response.content.decode()
+        self.assertEqual(self.strip_img(actual_html), self.strip_img(expected_html))
+        
+        
+    def strip_img(self, html):
+        """
+        strip the image tags which are randomly generated
+        """
+        p1 = html.find('<img')
+        p2 = html.find('">',p1+1)
+        p3 = html.find('<img', p2+1)
+        p4 = html.find('">', p3+1)
+        
+        html = html[:p1-1] + html[p2+1:p3-1] + html[p4+1:]
+        return html        

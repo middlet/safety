@@ -1,3 +1,14 @@
 <html>
-    <title>safetytron</title>
+    <head>
+        <title>safetytron</title>
+    </head>
+    <body>
+        <h1>safetytron</h1>
+        <p>Choose which image is most safe</p>
+        <div>
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=400x400&location={{p1.0}},{{p1.1}}&fov=90&heading=235&pitch=10&sensor=false" id="image1">
+            <button id="button" type="button">=</button>
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=400x400&location={{p2.0}},{{p2.1}}&fov=90&heading=235&pitch=10&sensor=false" id="image2">
+        </div>
+    </body>
 </html>

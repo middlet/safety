@@ -41,12 +41,23 @@ class NewVisitorTest(unittest.TestCase):
             Given: a visitor goes to the URL
             When: they look at the page
             Then: they see image1
+            Then: they see a button with "="
             Then: they see image2
         """
         image1 = self.browser.find_element_by_id('image1')
         image2 = self.browser.find_element_by_id('image2')
+        button = self.browser.find_element_by_id('button')
         self.assertIsNotNone(image1)
         self.assertIsNotNone(image2)
+        self.assertIsNotNone(button)
+        
+        """
+        Scenario: a user visits our website
+            Given: a visitor goes to the URL
+            When: they look at the page
+            Then: they see image1 which is different to image2
+        """
+        self.assertNotEqual(image1.get_attribute('src'), image2.get_attribute('src'))
         
         
         
