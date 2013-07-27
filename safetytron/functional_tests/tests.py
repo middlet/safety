@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-
+from django.test import LiveServerTestCase
 from selenium import webdriver
 
 import unittest
@@ -8,7 +7,7 @@ import unittest
 #   In order to decide the safety of a city
 #   I want users to compare random images from google streetview
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -18,7 +17,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_user_can_see_our_app(self):
-        self.browser.get('http://localhost:31337')
+        self.browser.get(self.live_server_url)
         """
         Scenario: a user visits our website
             Given: a visitor goes to the URL
@@ -58,12 +57,7 @@ class NewVisitorTest(unittest.TestCase):
             Then: they see image1 which is different to image2
         """
         self.assertNotEqual(image1.get_attribute('src'), image2.get_attribute('src'))
-        
-        
-        
-        
+
         # this is here to remind us we need to continue unit tests
         self.fail("finish the tests")
         
-if __name__ == '__main__':
-    unittest.main()
