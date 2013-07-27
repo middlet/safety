@@ -1,0 +1,2 @@
+# what we need to install
+Django==1.5
