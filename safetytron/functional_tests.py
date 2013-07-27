@@ -18,14 +18,40 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_user_can_see_our_app(self):
+        self.browser.get('http://localhost:31337')
         """
         Scenario: a user visits our website
             Given: a visitor goes to the URL
-            When: they look at the title
+            When: they look at the titlebar
             Then: they see the application name
         """
-        self.browser.get('http://localhost:31337')
         self.assertIn('safetytron', self.browser.title)
+
+        """
+        Scenario: a user visits our website
+            Given: a visitor goes to the URL
+            When: they look at the page
+            Then: they see a title
+        """
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('safetytron', header_text)
+        
+        """
+        Scenario: a user visits our website
+            Given: a visitor goes to the URL
+            When: they look at the page
+            Then: they see image1
+            Then: they see image2
+        """
+        image1 = self.browser.find_element_by_id('image1')
+        image2 = self.browser.find_element_by_id('image2')
+        self.assertIsNotNone(image1)
+        self.assertIsNotNone(image2)
+        
+        
+        
+        
+        # this is here to remind us we need to continue unit tests
         self.fail("finish the tests")
         
 if __name__ == '__main__':

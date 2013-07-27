@@ -41,4 +41,11 @@ def resetdb():
     with cd(env.code_root):
         run('python ./manage.py flush --noinput')
         run('python ./manage.py syncdb --noinput')
+        
+def test():
+    """
+    test the application
+    """
+    with cd(env.code_root):
+        run('python ./manage.py test safety')
     
