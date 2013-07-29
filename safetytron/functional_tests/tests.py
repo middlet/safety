@@ -20,7 +20,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.get(self.live_server_url)
         """
         Scenario: a user visits our website
-            Given: a visitor goes to the URL
+            Given: a visitor goes to "/"
             When: they look at the titlebar
             Then: they see the application name
         """
@@ -28,7 +28,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         """
         Scenario: a user visits our website
-            Given: a visitor goes to the URL
+            Given: a visitor goes to "/"
             When: they look at the page
             Then: they see a title
         """
@@ -36,8 +36,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('safetytron', header_text)
         
         """
-        Scenario: a user visits our website
-            Given: a visitor goes to the URL
+        Scenario: a user visits and sees the comparison images
+            Given: a visitor goes to "/"
             When: they look at the page
             Then: they see image1
             Then: they see a button with "="
@@ -51,12 +51,27 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIsNotNone(button)
         
         """
-        Scenario: a user visits our website
-            Given: a visitor goes to the URL
+        Scenario: a user visits and sees two distinct images
+            Given: a visitor goes to "/"
             When: they look at the page
             Then: they see image1 which is different to image2
         """
         self.assertNotEqual(image1.get_attribute('src'), image2.get_attribute('src'))
+        
+        """
+        Scenario: a user visits and sees a counter for number of uses
+            Given: a visitor goes to "/"
+            When: they look at the bottom of the page
+            Then: they see a counter for number of clicks
+        """
+        counter = self.browser.find_element_by_id('counter')
+        self.assertIsNotNone(counter)
+        """
+        Scenario: a user votes for an image
+            Given: a visitor clicks on an image
+            When: they look at the click counter
+            Then: the counter has incremented
+        """
 
         # this is here to remind us we need to continue unit tests
         self.fail("finish the tests")
