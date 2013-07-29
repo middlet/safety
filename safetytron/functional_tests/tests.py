@@ -72,6 +72,12 @@ class NewVisitorTest(LiveServerTestCase):
             When: they look at the click counter
             Then: the counter has incremented
         """
+        counter_text = counter.text
+        ncount_before = int(counter_text.split()[0])
+        image1.click()
+        counter_text = counter.text
+        ncount_after = int(counter_text.split()[0])
+        self.assertNotEqual(ncount_before, ncount_after)
 
         # this is here to remind us we need to continue unit tests
         self.fail("finish the tests")

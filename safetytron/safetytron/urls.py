@@ -5,5 +5,8 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'safety.views.home_page', name='home'),
+    url(r'^/?$', 'safety.views.home_page', name='home'),
+    
+    # ajax apis
+    url(r'^api/update/?$', 'safety.views.update_on_click', name='update click'),
 )

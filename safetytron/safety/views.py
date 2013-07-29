@@ -1,6 +1,8 @@
 import random
 
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
 
 
 def home_page(request):
@@ -11,6 +13,13 @@ def home_page(request):
     return render(request, 'home.html', {
         'p1':ll1, 'p2':ll2,
     })
+    
+
+def update_on_click(request):
+    if request.method == 'POST':
+        return redirect('/')
+    
+    return home_page(request)
 
 
 def _random_lat_long():

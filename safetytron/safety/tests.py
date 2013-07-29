@@ -2,12 +2,13 @@
 these are the tests for the main application
 """
 
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, reverse
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
 
 from safety.views import home_page
+from safety.views import update_on_click
 
 class HomePageTest(TestCase):
 
@@ -22,6 +23,19 @@ class HomePageTest(TestCase):
         actual_html = response.content.decode()
         self.assertEqual(self.strip_img(actual_html), self.strip_img(expected_html))
         
+    def test_click_page_resolves_correctly(self):
+        found = resolve('/api/update')
+        self.assertEqual(found.func, update_on_click)
+        
+    def test_selection_updates_database(self):
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['click'] = '1'
+        
+        response = update_on_click(request)
+        
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
         
     def strip_img(self, html):
         """
