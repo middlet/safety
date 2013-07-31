@@ -1,4 +1,6 @@
 from django.test import LiveServerTestCase
+
+from pyvirtualdisplay import Display
 from selenium import webdriver
 
 import unittest
@@ -10,11 +12,14 @@ import unittest
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
+        self.display = Display(visible=0, size=(1024, 768))
+        self.display.start()
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
         
     def tearDown(self):
         self.browser.quit()
+        self.display.stop()
 
     def test_user_can_see_our_app(self):
         self.browser.get(self.live_server_url)

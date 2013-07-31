@@ -9,6 +9,7 @@ ram = '512'
 
 # provision script
 $script = <<SCRIPT
+sudo apt-get update
 sudo apt-get install -y git
 sudo apt-get install -y python-pip
 sudo pip install -r /vagrant/requirements.txt
