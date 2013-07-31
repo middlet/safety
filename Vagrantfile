@@ -12,6 +12,10 @@ $script = <<SCRIPT
 sudo apt-get update
 sudo apt-get install -y git
 sudo apt-get install -y python-pip
+# for functional testing
+sudo apt-get install -y firefox
+sudo apt-get install -y xvfb
+# python packages
 sudo pip install -r /vagrant/requirements.txt
 SCRIPT
 
