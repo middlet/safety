@@ -1,5 +1,5 @@
 #
-# city safety 
+# city safety
 #
 
 # config options
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = hostname
     config.vm.network :private_network, ip: ip
     config.vm.network :forwarded_port, guest: 31337, host: 31337
-    
+
     config.vm.provider :virtualbox do |vb|
         vb.customize [
             'modifyvm', :id,
