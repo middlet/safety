@@ -18,9 +18,9 @@ sudo apt-get install -y postgresql-9.3-postgis-2.1 libpq-dev
 # create user
 sudo -u postgres createuser -s vagrant # superuser
 # create db
-sudo -u postgres createdb djmap
-sudo -u postgres psql -d djmap -c "CREATE EXTENSION postgis;"
-sudo -u postgres psql -d djmap -c "CREATE EXTENSION postgis_topology;"
+sudo -u postgres createdb safety
+sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis;"
+sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis_topology;"
 
 sudo pip install -r /vagrant/requirements.txt
 # gis utils
