@@ -5,6 +5,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 	url(r'^debug/(?P<place>[A-Za-z]+)$', 'gamecompare.views.debug', name='debug'),
+	url(r'^$', 'gamecompare.views.home', name='home'),	
     # Examples:
     # url(r'^$', 'safety.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
