@@ -29,6 +29,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'gamecompare/templates'),
+)
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gamecompare',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,8 +62,9 @@ WSGI_APPLICATION = 'safety.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'safety',
+        'USER': 'vagrant'
     }
 }
 
