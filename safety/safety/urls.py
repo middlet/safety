@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 #admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$', 'gamecompare.views.home', name='home'),
+	url(r'^debug/(?P<place>[A-Za-z]+)$', 'gamecompare.views.debug', name='debug'),
     # Examples:
     # url(r'^$', 'safety.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
