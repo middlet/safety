@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from .models import Cities, Roads
 
-
 def debug(request, place):
 	"""
 	render a page displaying the data for a city

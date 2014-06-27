@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>view data</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>view data</h1>
+        </div> <!-- /.col-md-12 -->
+      </div> <!-- /.row -->
+      <div class="row">
+      	<div class="col-md-12" id="debug">
+      	</div> <!-- /.col-md-12 /debug -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+
+    <!-- and javascript loads at the end -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+
+    <script type="text/javascript">
+// initial data
+var bounds = [{{bbox.0}}, {{bbox.1}}, {{bbox.2}}, {{bbox.3}}];
+var polygon = {{ poly }};
+var roads = {{ roads }};
+
+// get the dimensions of the div
+var width = d3.select('#debug').style("width").replace("px", "");
+var height = width/2;
+
+// create projection
+var dx = bounds[2]-bounds[0];
+var dy = bounds[3]-bounds[1];
+var cx = (bounds[2]+bounds[0])/2;
+var cy = (bounds[3]+bounds[1])/2;
+var scale = 35*0.95/Math.max(dx/width, dy/height);
+var translate = [width/2, height/2];
+var projection = d3.geo.mercator()
+                   .scale(scale)
+                   .center([cx, cy])
+                   .translate(translate);
+var pathLine = d3.svg.line()
+                 .x(function(d) { return projection([d[0], d[1]])[0]; })
+                 .y(function(d) { return projection([d[0], d[1]])[1]; });
+
+// create region for svg
+var svg = d3.select('#debug')
+            .append('svg')
+            .style('border', '1px solid #00ff00');
+// draw the polygon
+svg.append('path')
+   .attr('d', pathLine(polygon))
+   .style('fill', '#aaa');
+
+for (var ri=0; ri<roads.length; ri++)
+{
+	svg.append('circle')
+	   .attr('cx', projection(roads[ri])[0])
+	   .attr('cy', projection(roads[ri])[1])
+	   .attr('r', 2)
+	   .style('fill', 'red');
+}
+
+    </script>
+  </body>
+</html>
