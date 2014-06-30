@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.gis.db import models as gismodels
+from django.core.files import File
+
+import os
+import urllib
+
 
 class Cities(gismodels.Model):
 	"""
@@ -16,3 +21,19 @@ class Roads(gismodels.Model):
 	name = models.CharField(max_length=48, null=True)
 	geom = gismodels.PointField()
 	objects = gismodels.GeoManager()
+
+class StreetViewImage(models.Model):
+	"""
+	grab an image via google street view and cache locally
+	"""
+	url = models.CharField(max_length=2000, unique=True)
+	streetimage = models.ImageField(upload_to="gamecompare/images", blank=True)
+
+	def cache(self):
+		"""
+		cache the image locally if we have a valid url
+		"""
+		if self.url and not self.streetimage:
+			result = urllib.urlretrieve(self.url)
+			self.streetimage.save(os.path.basename(self.url), File(open(result[0])))
+			self.save()
