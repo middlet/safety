@@ -22,6 +22,9 @@ sudo -u postgres createdb safety
 sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis;"
 sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis_topology;"
 
+# imaging requirements
+sudo apt-get install python-pillow
+
 sudo pip install -r /vagrant/requirements.txt
 # gis utils
 sudo apt-get install -y gdal-bin
