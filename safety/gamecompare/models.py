@@ -33,7 +33,10 @@ class StreetViewImage(models.Model):
 		"""
 		cache the image locally if we have a valid url
 		"""
+		print self.url
 		if self.url and not self.streetimage:
 			result = urllib.urlretrieve(self.url)
-			self.streetimage.save(os.path.basename(self.url), File(open(result[0])))
+			fname = os.path.basename(self.url).split('&')[-1]+".jpg"
+			print fname, result
+			self.streetimage.save(fname, File(open(result[0])))
 			self.save()

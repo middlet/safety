@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from random import choice
 
+import base64
 import os
 import requests
+import StringIO
 
 from .models import Cities, Roads, StreetViewImage
 
@@ -45,11 +47,14 @@ def home(request):
 		try:
 			s = StreetViewImage.objects.get(url__exact=svurl.format(pt[1], pt[0]))
 		except:
-			s = StreetViewImage(url=svurl.format(pt[0], pt[1]))
+			s = StreetViewImage(url=svurl.format(pt[1], pt[0]))
 			s.cache()
-			images[pi] = s.streetimage.read()
+			image = s.streetimage.open()
+			out = StringIO.StringIO()
+			base64.encode(image, out)
+			images[pi] = out.getvalue().replace('\n', '')
 
-	context = {'im0':images[0], 'im1':images[1]}
+	context = {'im0':images[0], 'im1':images[1], 'pt0':point[0], 'pt1':point[1]}
 	print 'final', point[0][0]-point[1][0], point[0][1]-point[1][1]
 	# 
 	return render(request, 'home.html', context)

@@ -3,7 +3,7 @@
 #
 
 # config options
-ip = '10.53.0.2'
+ip = '10.0.0.2'
 hostname = 'safety'
 ram = '512'
 
@@ -23,7 +23,7 @@ sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis;"
 sudo -u postgres psql -d safety -c "CREATE EXTENSION postgis_topology;"
 
 # imaging requirements
-sudo apt-get install python-pillow
+sudo apt-get install -y python-pil
 
 sudo pip install -r /vagrant/requirements.txt
 # gis utils
