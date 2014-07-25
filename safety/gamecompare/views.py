@@ -43,18 +43,18 @@ def home(request):
 
 	svurl = 'http://maps.googleapis.com/maps/api/streetview?size=400x400&location={},{}'
 	images = [None, None]
+
 	for pi, pt in enumerate(point):
+		print 'point=',pt
 		try:
 			s = StreetViewImage.objects.get(url__exact=svurl.format(pt[1], pt[0]))
 		except:
 			s = StreetViewImage(url=svurl.format(pt[1], pt[0]))
 			s.cache()
-			image = s.streetimage.open()
-			out = StringIO.StringIO()
-			base64.encode(image, out)
-			images[pi] = out.getvalue().replace('\n', '')
+		image = s.streetimage.read()
+		images[pi] = 'data:image/jpg;base64,%s' % base64.b64encode(image)
 
 	context = {'im0':images[0], 'im1':images[1], 'pt0':point[0], 'pt1':point[1]}
 	print 'final', point[0][0]-point[1][0], point[0][1]-point[1][1]
-	# 
+	#
 	return render(request, 'home.html', context)

@@ -16,7 +16,7 @@ class Cities(gismodels.Model):
 
 class Roads(gismodels.Model):
 	"""
-	store a single point for the centre of each road 
+	store a single point for the centre of each road
 	"""
 	name = models.CharField(max_length=48, null=True)
 	geom = gismodels.PointField()
@@ -37,6 +37,6 @@ class StreetViewImage(models.Model):
 		if self.url and not self.streetimage:
 			result = urllib.urlretrieve(self.url)
 			fname = os.path.basename(self.url).split('&')[-1]+".jpg"
-			print fname, result
+			print 'fname = ', fname, 'result = ', result
 			self.streetimage.save(fname, File(open(result[0])))
 			self.save()
