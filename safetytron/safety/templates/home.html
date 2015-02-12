@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>safetytron</title>
+    </head>
+    <body>
+        <h1>safetytron</h1>
+        <p>Choose which image is most safe</p>
+        <div>
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=400x400&location={{p1.0}},{{p1.1}}&fov=90&heading=235&pitch=10&sensor=false" id="image1">
+            <button id="button" type="button">=</button>
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=400x400&location={{p2.0}},{{p2.1}}&fov=90&heading=235&pitch=10&sensor=false" id="image2">
+        </div>
+        <p id="counter">0 clicks</p>
+        
+        
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript">
+$(document).ready(function() {
+    $('#image1').click(function() {
+        $.post("api/update", {click:"1"});
+    });
+});
+        </script>
+        
+    </body>
+</html>

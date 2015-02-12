@@ -1,6 +1,9 @@
-*.pyc
 .vagrant
 data
 *.sql
 images
 fixtures
+*.log
+*.pot
+*.pyc
+local_settings.py

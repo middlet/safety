@@ -48,6 +48,5 @@ Vagrant.configure("2") do |config|
             '--memory', ram
         ]
     end
-
     config.vm.provision :shell, :inline => $script
 end

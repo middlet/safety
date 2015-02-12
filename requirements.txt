@@ -1,5 +1,6 @@
-Django
-psycopg2
-
-
 # 
+=======
+# what we need to install
+Django==1.5
+selenium
+pyvirtualdisplay
